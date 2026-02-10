@@ -110,7 +110,7 @@ const FooterSection = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          {[
+        {[
             { href: "https://linkedin.com", icon: Linkedin, color: "hsl(var(--primary))" },
             { href: "https://github.com", icon: Github, color: "hsl(var(--accent))" },
             { href: "mailto:samrobinsinghe303@gmail.com", icon: Mail, color: "hsl(var(--warm))" },
@@ -124,6 +124,23 @@ const FooterSection = () => {
               whileHover={{ scale: 1.2, y: -2, color: s.color }}
             >
               <s.icon className="w-5 h-5" />
+            </motion.a>
+          ))}
+          {/* Coding profiles */}
+          {[
+            { href: "https://leetcode.com/u/Sam_Robin_Singh", icon: LeetCodeIconSmall, color: "hsl(37, 100%, 50%)" },
+            { href: "https://www.codechef.com/users/sam_robin", icon: CodeChefIconSmall, color: "hsl(16, 80%, 55%)" },
+            { href: "https://www.hackerrank.com/profile/samrobinsinghe30", icon: HackerRankIconSmall, color: "hsl(145, 70%, 45%)" },
+          ].map((s) => (
+            <motion.a
+              key={s.href}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-lg text-muted-foreground transition-colors"
+              whileHover={{ scale: 1.2, y: -2, color: s.color }}
+            >
+              <s.icon />
             </motion.a>
           ))}
         </motion.div>

@@ -143,11 +143,12 @@ const HeroSection = () => {
           </span>
         </motion.div>
 
+        {/* Social links */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 1.1 }}
-          className="flex items-center justify-center gap-4 mt-8"
+          className="flex items-center justify-center gap-3 mt-8"
         >
           {[
             { href: "https://linkedin.com", icon: Linkedin, color: "hsl(var(--primary))" },
@@ -171,6 +172,21 @@ const HeroSection = () => {
             >
               <social.icon className="w-5 h-5 text-foreground" />
             </motion.a>
+          ))}
+
+          {/* Divider */}
+          <div className="w-px h-8 mx-1" style={{ background: "linear-gradient(to bottom, transparent, hsl(var(--border)), transparent)" }} />
+
+          {/* Coding profiles with 3D animation */}
+          {codingProfiles.map((profile, i) => (
+            <CodingProfileIcon
+              key={profile.label}
+              href={profile.href}
+              label={profile.label}
+              icon={profile.icon}
+              color={profile.color}
+              delay={1.4 + i * 0.12}
+            />
           ))}
         </motion.div>
 
