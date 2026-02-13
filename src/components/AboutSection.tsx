@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 import AnimatedCounter from "./AnimatedCounter";
 
@@ -27,10 +27,62 @@ const borderColorMap = {
   warm: "hsl(var(--warm) / 0.15)",
 };
 
+const glowColorMap = {
+  primary: "hsl(var(--primary) / 0.2)",
+  accent: "hsl(var(--accent) / 0.2)",
+  warm: "hsl(var(--warm) / 0.2)",
+};
+
+const StatCard = ({ stat, index }: { stat: typeof stats[0]; index: number }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useTransform(y, [-50, 50], [8, -8]);
+  const rotateY = useTransform(x, [-50, 50], [-8, 8]);
+
+  const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set(e.clientX - rect.left - rect.width / 2);
+    y.set(e.clientY - rect.top - rect.height / 2);
+  };
+
+  const handleLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      className="rounded-xl p-5 text-center backdrop-blur-xl transition-all duration-500 cursor-default"
+      style={{
+        background: bgColorMap[stat.color],
+        border: `1px solid ${borderColorMap[stat.color]}`,
+        perspective: "600px",
+        transformStyle: "preserve-3d",
+        rotateX,
+        rotateY,
+      }}
+      onMouseMove={handleMouse}
+      onMouseLeave={handleLeave}
+      initial={{ opacity: 0, scale: 0.9, rotateX: 15 }}
+      whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.1 * index, duration: 0.6 }}
+      whileHover={{
+        scale: 1.08,
+        boxShadow: `0 0 30px ${glowColorMap[stat.color]}`,
+      }}
+    >
+      <div className={`text-3xl md:text-4xl font-bold mb-1 ${colorMap[stat.color]}`}>
+        <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+      </div>
+      <p className="text-muted-foreground text-xs font-mono uppercase tracking-wider">{stat.label}</p>
+    </motion.div>
+  );
+};
+
 const AboutSection = () => {
   return (
     <section id="about" className="section-padding relative">
-      {/* Section divider */}
       <div className="section-divider absolute top-0 left-[10%] right-[10%]" />
 
       <div className="max-w-4xl mx-auto">
@@ -50,43 +102,21 @@ const AboutSection = () => {
           on edge devices (Jetson Nano, Raspberry Pi) using TensorFlow Lite, OpenCV, and OCR.
         </motion.p>
 
-        {/* Stats Row */}
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
+        {/* Stats Row with 3D tilt */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
           {stats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              className="rounded-xl p-5 text-center backdrop-blur-xl transition-all duration-500"
-              style={{
-                background: bgColorMap[stat.color],
-                border: `1px solid ${borderColorMap[stat.color]}`,
-              }}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 * i, duration: 0.5 }}
-              whileHover={{ scale: 1.05, y: -2 }}
-            >
-              <div className={`text-3xl md:text-4xl font-bold mb-1 ${colorMap[stat.color]}`}>
-                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-              </div>
-              <p className="text-muted-foreground text-xs font-mono uppercase tracking-wider">{stat.label}</p>
-            </motion.div>
+            <StatCard key={stat.label} stat={stat} index={i} />
           ))}
-        </motion.div>
+        </div>
 
         {/* Education */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20, rotateX: 10 }}
+          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-12 glass-accent rounded-xl p-6"
+          style={{ perspective: "800px" }}
         >
           <div className="flex items-center gap-3 mb-3">
             <motion.span
