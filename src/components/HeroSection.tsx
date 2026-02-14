@@ -3,8 +3,6 @@ import { Mail, Phone, MapPin, Github, Linkedin, ChevronDown, Download, Sparkles 
 import heroBg from "@/assets/hero-bg.jpg";
 import ParticleField from "./ParticleField";
 import CodingProfileIcon from "./CodingProfileIcon";
-import TypingAnimation from "./TypingAnimation";
-import Robot3D from "./Robot3D";
 
 const LeetCodeIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -109,10 +107,9 @@ const HeroSection = () => {
       />
 
       <motion.div
-        className="relative z-10 w-full max-w-6xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-8"
+        className="relative z-10 text-center max-w-4xl mx-auto px-4"
         style={{ opacity: textOpacity, y: textY }}
       >
-        <div className="text-center lg:text-left flex-1">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -154,7 +151,7 @@ const HeroSection = () => {
             </motion.span>
           </h1>
           <motion.p
-            className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 mb-2 leading-relaxed"
+            className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.7 }}
@@ -162,14 +159,6 @@ const HeroSection = () => {
             Building end-to-end AI solutions — from deep learning & computer vision
             to edge deployment & intelligent automation.
           </motion.p>
-          <motion.div
-            className="text-xl md:text-2xl font-semibold mb-6 h-10"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-          >
-            <TypingAnimation />
-          </motion.div>
         </motion.div>
 
         {/* CTA Buttons */}
@@ -177,7 +166,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.85 }}
-          className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-8"
+          className="flex flex-wrap items-center justify-center gap-4 mb-8"
         >
           {/* Resume Download */}
           <motion.a
@@ -233,7 +222,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.95 }}
-          className="flex flex-wrap items-center justify-center lg:justify-start gap-4 text-sm text-muted-foreground"
+          className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground"
         >
           <motion.a
             href="mailto:samrobinsinghe303@gmail.com"
@@ -258,7 +247,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 1.1 }}
-          className="flex items-center justify-center lg:justify-start gap-3 mt-8"
+          className="flex items-center justify-center gap-3 mt-8"
         >
           {[
             { href: "https://linkedin.com", icon: Linkedin, color: "hsl(var(--primary))" },
@@ -298,17 +287,6 @@ const HeroSection = () => {
               delay={1.4 + i * 0.12}
             />
           ))}
-        </motion.div>
-        </div>
-
-        {/* 3D Robot */}
-        <motion.div
-          className="flex-shrink-0 hidden md:block"
-          initial={{ opacity: 0, x: 60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          <Robot3D />
         </motion.div>
 
         <motion.div
