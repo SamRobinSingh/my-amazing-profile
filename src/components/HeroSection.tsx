@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Github, Linkedin, ChevronDown, Download, Sparkles 
 import heroBg from "@/assets/hero-bg.jpg";
 import ParticleField from "./ParticleField";
 import CodingProfileIcon from "./CodingProfileIcon";
+import TypingAnimation from "./TypingAnimation";
 
 const LeetCodeIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -127,7 +128,7 @@ const HeroSection = () => {
           >
             <Sparkles className="w-3.5 h-3.5 text-primary" />
             <span className="font-mono text-xs tracking-wider uppercase text-primary">
-              AI & Machine Learning Engineer
+              <TypingAnimation />
             </span>
           </motion.div>
 
