@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Linkedin, Github, ArrowUp, Menu, X, Download } from "lucide-react";
 import { useState, useEffect } from "react";
-import ThemeToggle from "./ThemeToggle";
 
 const LeetCodeIconSmall = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -89,7 +88,6 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <ThemeToggle />
           {/* Resume download in nav */}
           <motion.a
             href="/Sam_Robin_Singh_Resume.pdf"
